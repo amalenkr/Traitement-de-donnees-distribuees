@@ -13,24 +13,25 @@ haar_cascade_face = cv2.CascadeClassifier('./haarcascade_frontalface_default.xml
 def face_detection(image_path):
     image_name = os.path.basename(image_path)
     image = cv2.imread(image_path)
-    image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    copy = image.copy()
+    image_gray = cv2.cvtColor(copy, cv2.COLOR_BGR2GRAY)
     faces_rects = haar_cascade_face.detectMultiScale(image_gray, scaleFactor = 1.2, minNeighbors = 5);
     if len(faces_rects) !=0:
         for (x,y,w,h) in faces_rects:
-            face_rect = cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
+            face_rect = cv2.rectangle(copy, (x, y), (x+w, y+h), (0, 255, 0), 5)
         cv2.imwrite("Data/detected_faces/" + image_name, face_rect)
 
 def main():
     images = list(glob.iglob("Data/covers/*.jpg"))
     images.sort()
-    print(images)
+    
     start = time.time()
     for i in images:
         face_detection(i)
     end = time.time()
     print("Series computation: {} secs\n".format(end - start))
     
-    """start = time.time()
+    start = time.time()
     threads = []
     for i in images:
         t = Thread(target=face_detection, args=(i,))
@@ -40,7 +41,7 @@ def main():
     for t in threads: t.join()
     end = time.time()
     print("Multithreading computation: {} secs\n".format(end - start))
-"""
+
 
     start = time.time()
     with mp.Pool(cpus) as p:
