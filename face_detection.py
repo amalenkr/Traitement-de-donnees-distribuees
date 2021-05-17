@@ -30,18 +30,6 @@ def main():
         face_detection(i)
     end = time.time()
     print("Series computation: {} secs\n".format(end - start))
-    
-    start = time.time()
-    threads = []
-    for i in images:
-        t = Thread(target=face_detection, args=(i,))
-        threads.append(t)
-        t.start()
-      
-    for t in threads: t.join()
-    end = time.time()
-    print("Multithreading computation: {} secs\n".format(end - start))
-
 
     start = time.time()
     with mp.Pool(cpus) as p:
@@ -62,6 +50,18 @@ def main():
     end = time.time()
     print("Multiprocessing computation (with Process): {} secs\n".format(end - start))
 
+    
+    start = time.time()
+    threads = []
+    for i in images:
+        t = Thread(target=face_detection, args=(i,))
+        threads.append(t)
+        t.start()
+      
+    for t in threads: t.join()
+    end = time.time()
+    print("Multithreading computation: {} secs\n".format(end - start))
+    
 if __name__ == '__main__':
     # Better protect your main function when you use multiprocessing
     main()

@@ -45,42 +45,28 @@ def tokenize_url_hashtags(corpus, tweets=False):
             tokens = list(map(lambda x: x.lower(), tokens))
             tokenized_sentences.append(tokens)
     return tokenized_sentences
-
-def show_phrases(tokenized_sentences, threshold=10, shown=15):
-  # Training the multi-word expression detector
-    phrases = Phrases(tokenized_sentences, threshold=threshold)
-    i = 0
-    for phrase, score in phrases.export_phrases(tokenized_sentences):
-        if i>shown:
-            break
-    else:
-        print("Expression : {0}, score = {1}".format(phrase, score))
-    i=i+1
-
     
 def nlp_processing(file):
     data = pd.read_csv(file, encoding='latin-1')
     if 'movies_metadata' in file:
         cleaned_data = tokenize_url_hashtags(data.overview.dropna().array)
-        show_phrases(cleaned_data, threshold=1000)     
         mo = Word2Vec(cleaned_data, size=100, window=5, min_count=3)
         mo.train(cleaned_data, total_examples=len(cleaned_data), epochs=10)
     elif 'Political-media' in file:
         cleaned_data = tokenize_url_hashtags(data.text.array, tweets=True)
-        show_phrases(cleaned_data, threshold=1000)
         pol = Word2Vec(cleaned_data, size=100, window=5, min_count=3)
         pol.train(cleaned_data, total_examples=len(cleaned_data), epochs=10)
     else:
         cleaned_data = tokenize_url_hashtags(data.text.array, tweets=False)
-        show_phrases(cleaned_data, threshold=100)
         eco = Word2Vec(cleaned_data, size=100, window=5, min_count=3)
         eco.train(cleaned_data, total_examples=len(cleaned_data), epochs=10)
     
 def main():
-    files = glob.glob("Data/*.csv")
+    files = glob.glob("Data/nlp/*.csv")
 
     start = time.time()
     for i in files:
+        print(i)
         nlp_processing(i)
     end = time.time()
     print("Series computation: {} secs\n".format(end - start))
