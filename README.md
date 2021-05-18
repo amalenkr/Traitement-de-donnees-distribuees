@@ -11,3 +11,5 @@ Here are the description of each file. Each file corresponds to an application f
 | `classification.py` | Binary classification problem hyperparameters tuning with a GridSearchCV |
 | `face_detection.py` | Face detection experiment on 187 photos |
 | `nlp.py` | Textual data pre-processing + Word2Vec on 3 datasets |
+| `Data` | Data folder |
+| `report.pdf` | Project (french) report |
