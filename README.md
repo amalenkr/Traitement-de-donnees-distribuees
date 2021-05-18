@@ -8,4 +8,6 @@ Here are the description of each file. Each file corresponds to an application f
 | ------ | ------ |
 | `sleep.py` | Delaying the execution for a given number of seconds |
 | `calculation.py` | Product of all the elements in a list of large numbers |
-| `classification.py` | Binary classification problem hyperparameters tuning with a GridSearchCV. |
+| `classification.py` | Binary classification problem hyperparameters tuning with a GridSearchCV |
+| `face_detection.py` | Face detection experiment on 187 photos |
+| `nlp.py` | Textual data pre-processing + Word2Vec on 3 datasets |
