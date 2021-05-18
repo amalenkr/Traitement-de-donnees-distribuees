@@ -1,4 +1,4 @@
-# Traitement-de-donnees-distribuees
+# Distributed computing
 #### By Lilia BEN BACCAR and Amale NOKRI
 A comparison between sequential execution, multithreading, multiprocessing (`Pool`) and multiprocessing (`Process`) with multiple experiments.
 
