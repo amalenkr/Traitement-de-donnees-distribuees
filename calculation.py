@@ -17,7 +17,7 @@ def main():
     for i in numbers:
         calculation(i)
     end = time.time()
-    print("Series computation: {} secs\n".format(end - start))
+    print("Series: {} secs\n".format(end - start))
     
     start = time.time()
     threads = []
