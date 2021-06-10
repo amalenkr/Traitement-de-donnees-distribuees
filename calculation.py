@@ -28,7 +28,7 @@ def main():
       
     for t in threads: t.join()
     end = time.time()
-    print("Multithreading computation: {} secs\n".format(end - start))
+    print("Multithreading comp: {} secs\n".format(end - start))
 
 
     start = time.time()
